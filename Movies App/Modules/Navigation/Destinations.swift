@@ -13,7 +13,7 @@ enum Destinations {
     var viewcontroller: UIViewController {
         switch self {
         case .moviesVC:
-            return MoviesViewController()
+            return MoviesViewController(with: MoviesViewModel())
         }
     }
 }
