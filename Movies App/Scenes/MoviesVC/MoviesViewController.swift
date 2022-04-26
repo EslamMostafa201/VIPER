@@ -65,7 +65,7 @@ class MoviesViewController: UIViewController, Loadable {
     }
 }
 
-//MARK: - Outlets
+//MARK: - TableView Methods
 extension MoviesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getNumberOfCells()
@@ -75,6 +75,10 @@ extension MoviesViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = moviesTableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath) as! MovieTableViewCell
         cell.configureCell(model: viewModel.getCellAt(index: indexPath.row))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.navigateToDetails(movieId: viewModel.getCellAt(index: indexPath.row).id ?? 0)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

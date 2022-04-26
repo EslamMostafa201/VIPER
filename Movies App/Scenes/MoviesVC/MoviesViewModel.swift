@@ -11,6 +11,7 @@ protocol MoviesViewModelProtocol {
     func getNumberOfCells() -> Int
     func getCellAt(index: Int) -> Movies
     func checkIsHasNext() -> Bool
+    func navigateToDetails(movieId: Int)
     func getMoviesApi()
     var reloadTableClosure: (()->())? {get set}
     var updateLoadingStatus : ((_ status: Bool)->())? {get set}
@@ -36,7 +37,7 @@ class MoviesViewModel: MoviesViewModelProtocol {
         self.moviesAPI = moviesAPI
     }
     
-    // MARK: - Meethods
+    // MARK: - Methods
     func getNumberOfCells() -> Int {
         return moviesList.count
     }
@@ -47,6 +48,10 @@ class MoviesViewModel: MoviesViewModelProtocol {
     
     func checkIsHasNext() -> Bool {
         return (pageNumber > totalPages) ? false : true
+    }
+    
+    func navigateToDetails(movieId: Int) {
+        try? AppNavigator().push(.movieDetailsVC(movieId: movieId))
     }
     
     func getMoviesApi() {
