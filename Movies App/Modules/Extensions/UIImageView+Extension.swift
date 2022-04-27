@@ -12,9 +12,9 @@ import Kingfisher
 extension UIImageView {
     
     func loadFromUrl(stringUrl : String) {
-        let imageBase = "https://image.tmdb.org/t/p/w500" + stringUrl
+        let imageBase = Constants.IMAGEURL + stringUrl
         let imageurl = URL(string : imageBase.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)!)
-        let image = UIImage(named: "Logo")
+        let image = UIImage(named: "defaultImg")
         self.kf.setImage(with: imageurl , placeholder: image, options: [.cacheOriginalImage])
     }
     

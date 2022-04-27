@@ -9,8 +9,9 @@ import Foundation
 
 struct Constants {
     //The API's base URL
-    static let baseUrl = "https://api.themoviedb.org/3/"
+    static let BASEURL = "https://api.themoviedb.org/3/"
     static let APIKEY = "c9856d0cb57c3f14bf75bdc6c063b8f3"
+    static let IMAGEURL = "https://image.tmdb.org/t/p/w500"
     
     //The parameters (Queries) that we're gonna use
     struct Parameters {

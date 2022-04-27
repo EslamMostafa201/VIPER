@@ -26,7 +26,7 @@ extension ApiRouter {
     
     //MARK: - URLRequestConvertible
     func asURLRequest() throws -> URLRequest {
-        let url = try (Constants.baseUrl).asURL()
+        let url = try (Constants.BASEURL).asURL()
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         //Http method
         urlRequest.httpMethod = method.rawValue
