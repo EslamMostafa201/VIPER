@@ -28,7 +28,7 @@ struct MovieDetailsModel: Codable {
     let video: Bool?
     let vote_average: Double?
     let vote_count: Int?
-
+    
     enum CodingKeys: String, CodingKey {
         case adult = "adult"
         case backdrop_path = "backdrop_path"
@@ -51,7 +51,7 @@ struct MovieDetailsModel: Codable {
         case vote_average = "vote_average"
         case vote_count = "vote_count"
     }
-
+    
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         adult = try values.decodeIfPresent(Bool.self, forKey: .adult)

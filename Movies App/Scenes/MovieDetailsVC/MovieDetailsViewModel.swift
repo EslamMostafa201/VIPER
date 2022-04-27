@@ -20,7 +20,7 @@ class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
     var getMovieDetailClosure: ((MovieDetailsModel) -> ())?
     var updateLoadingStatus: ((Bool) -> ())?
     var showAlertClosure: ((String) -> ())?
-    private var movieId : Int
+    private var movieId: Int
     
     // MARK: - Initialization
     init(movieDetailsAPI: ApiClientProtocol = ApiClient(), movieId: Int) {

@@ -13,6 +13,7 @@ class MovieDetailsViewController: UIViewController, Loadable {
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
     // MARK: - Properties
     private var viewModel: MovieDetailsViewModelProtocol
@@ -30,13 +31,18 @@ class MovieDetailsViewController: UIViewController, Loadable {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         configureBinding()
         viewModel.getMovieDetailsApi()
     }
     
-    private func configureBinding() {
+    // MARK: - Methods
+    private func setupUI() {
         self.title = "Details"
-        
+        containerView.isHidden = true
+    }
+    
+    private func configureBinding() {
         viewModel.getMovieDetailClosure = { [weak self] movie in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -64,5 +70,6 @@ class MovieDetailsViewController: UIViewController, Loadable {
         movieTitleLabel.text = movie.title ?? ""
         dateLabel.text = movie.release_date ?? ""
         descriptionLabel.text = movie.overview ?? ""
+        containerView.isHidden = false
     }
 }

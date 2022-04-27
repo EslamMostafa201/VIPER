@@ -27,14 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = .red
+            appearance.backgroundColor = PublicMethods.hexaStringToUIColor("AF52E8")
             appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navigationBarAppearace.tintColor = .white
             navigationBarAppearace.standardAppearance = appearance
             navigationBarAppearace.scrollEdgeAppearance = navigationBarAppearace.standardAppearance
         } else {
             navigationBarAppearace.tintColor = .white
-            navigationBarAppearace.barTintColor = .red
+            navigationBarAppearace.barTintColor = PublicMethods.hexaStringToUIColor("AF52E8")
             navigationBarAppearace.titleTextAttributes = [.foregroundColor: UIColor.white]
             navigationBarAppearace.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         }

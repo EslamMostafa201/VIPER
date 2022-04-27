@@ -14,8 +14,8 @@ protocol MoviesViewModelProtocol {
     func navigateToDetails(movieId: Int)
     func getMoviesApi()
     var reloadTableClosure: (()->())? {get set}
-    var updateLoadingStatus : ((_ status: Bool)->())? {get set}
-    var showAlertClosure : ((_ message: String)->())? {get set}
+    var updateLoadingStatus: ((_ status: Bool)->())? {get set}
+    var showAlertClosure: ((_ message: String)->())? {get set}
 }
 
 class MoviesViewModel: MoviesViewModelProtocol {
