@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailsViewController: UIViewController, Loadable {
+class MovieDetailsViewController: UIViewController, Loadable, MovieDetailsViewProtocol {
     // MARK: - Outlets
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var movieTitleLabel: UILabel!
@@ -16,24 +16,13 @@ class MovieDetailsViewController: UIViewController, Loadable {
     @IBOutlet weak var containerView: UIView!
     
     // MARK: - Properties
-    private var viewModel: MovieDetailsViewModelProtocol
-    
-    // MARK: - Initialization
-    init(with viewModel: MovieDetailsViewModelProtocol) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var presenter: MovieDetailsPresenterProtocol?
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        configureBinding()
-        viewModel.getMovieDetailsApi()
+        presenter?.viewDidLoad()
     }
     
     // MARK: - Methods
@@ -42,34 +31,19 @@ class MovieDetailsViewController: UIViewController, Loadable {
         containerView.isHidden = true
     }
     
-    private func configureBinding() {
-        viewModel.getMovieDetailClosure = { [weak self] movie in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.setMovieData(movie: movie)
-            }
-        }
-        
-        viewModel.updateLoadingStatus = { [weak self] status in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.showLoading(show: status)
-            }
-        }
-        
-        viewModel.showAlertClosure = { [weak self] message in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.showAlert(alertTitle: "Error !", alertMessge: message, actionTitle: "OK")
-            }
-        }
+    func showLoadingIndicator() {
+        self.showLoading(show: true)
     }
     
-    private func setMovieData(movie: MovieDetailsModel) {
-        movieImageView.loadFromUrl(stringUrl: movie.poster_path ?? "")
-        movieTitleLabel.text = movie.title ?? ""
-        dateLabel.text = movie.release_date ?? ""
-        descriptionLabel.text = movie.overview ?? ""
+    func hideLoadingIndicator() {
+        self.showLoading(show: false)
+    }
+    
+    func showData(model: MovieDetailsModel) {
+        movieImageView.loadFromUrl(stringUrl: model.poster_path ?? "")
+        movieTitleLabel.text = model.title ?? ""
+        dateLabel.text = model.release_date ?? ""
+        descriptionLabel.text = model.overview ?? ""
         containerView.isHidden = false
     }
 }

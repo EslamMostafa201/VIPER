@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieTableViewCell: UITableViewCell {
+class MovieTableViewCell: UITableViewCell, MovieCellView {
     //MARK: - Outlets
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var movieTitleLabel: UILabel!
@@ -29,9 +29,9 @@ class MovieTableViewCell: UITableViewCell {
     }
 
     //MARK: - Methods
-    func configureCell(model: Movies) {
-        movieTitleLabel.text = model.title ?? ""
-        dateLabel.text = model.release_date ?? ""
-        movieImageView.loadFromUrl(stringUrl: model.poster_path ?? "")
+    func congigureCell(viewModel: MoviesViewModel) {
+        movieTitleLabel.text = viewModel.title
+        dateLabel.text = viewModel.date
+        movieImageView.loadFromUrl(stringUrl: viewModel.avatar)
     }
 }

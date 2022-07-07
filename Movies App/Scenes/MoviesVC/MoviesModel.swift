@@ -80,3 +80,15 @@ struct Movies: Codable {
         vote_count = try values.decodeIfPresent(Int.self, forKey: .vote_count)
     }
 }
+
+struct MoviesViewModel {
+    var title: String
+    var date: String
+    var avatar: String
+    
+    init(movie: Movies) {
+        title = movie.title ?? ""
+        date = movie.release_date ?? ""
+        avatar = movie.poster_path ?? ""
+    }
+}
